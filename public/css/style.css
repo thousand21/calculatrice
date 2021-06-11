@@ -1,0 +1,36 @@
+.div1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.div2{
+    display: flex;
+    
+    align-items: center;
+    
+    flex-direction: column;
+}
+.input1{
+    margin-top: 40px;
+    width: 60%;
+    float: right;
+    height: 40px;
+}
+button{
+   
+    margin-right: 20px;
+}
+.Numbers{
+    background-color: cornflowerblue;
+}
+.Operateurs{
+    background-color: yellow;
+    
+}
+.divLigne{
+    margin-top: 20px;
+}
+.egal{
+    width: 150px;
+    height: 50px;
+}
