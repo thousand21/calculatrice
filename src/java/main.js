@@ -1,3 +1,8 @@
+///import
+/* import * as reset from './reset.js' */
+
+
+
 //creer 2div calculette
 let div1=document.createElement("div");
 let div2=document.createElement("div");
@@ -15,7 +20,7 @@ body.append(div1);
 /////creer input
 let input1=document.createElement("input");
 input1.classList.add("input1");
-input1.setAttribute("style",'float:right')
+input1.setAttribute("style",'float:right');
 div2.append(input1);
 
 //////create buttonNumbers
@@ -90,12 +95,13 @@ div2.append(div5emeLigne);
 
 let  nombre1="";
 let nombre2="";
-let operateurChoisi;
+
 let openMid=true;
 
 //on selectionne loperateur et on passe au 2eme chiffre
 tabOperateur[0].addEventListener("click",()=>{
    operatorChoisi=`plus`;
+   console.log(input1.innerText);
    openMid=false;
 });
 tabOperateur[1].addEventListener("click",()=>{
@@ -116,8 +122,9 @@ tabOperateur[3].addEventListener("click",()=>{
 body.addEventListener("click",(e)=>{
     if(e.target.getAttribute("class")=="Numbers" &&openMid==true){
         nombre1+=(e.target.innerText);
-            input1.value=nombre1;
+        input1.value=nombre1;
         console.log((Number(nombre1)));
+        
     }
     else if(e.target.getAttribute("class")=="Numbers" &&openMid==false){
         
@@ -126,10 +133,68 @@ body.addEventListener("click",(e)=>{
         console.log((Number(nombre2)));
     }
         
-            
+          
   
    
 })
+
+///////////clavier
+let chiff2=false;
+let operateur;
+if(openMid==true){
+    input1.addEventListener("keypress",(e)=>{
+        if(chiff2==false){
+        
+            nombre1+=e.key;
+            console.log(e.key);
+        
+            
+        }
+        
+        if(chiff2==true ){
+            nombre2+=e.key;
+            console.log(e.key);
+        }
+        if((e.key=="+" || e.key=="-" || e.key=="*" || e.key=="/") && chiff2==false){
+            operateur=e.key;
+            nombre1=nombre1.substring(0,nombre1.length-1);
+            chiff2=true;
+            
+        }
+        else if(e.key=="=" ||e.key=="Enter"){
+            if(e.key=="Enter"){
+                nombre2=nombre2.substring(0,nombre2.length-5);
+            }
+            else{
+                nombre2=nombre2.substring(0,nombre2.length-1);
+            }
+            
+            console.log(nombre1);
+            console.log(nombre2);
+            if(operateur=="+"){
+                input1.value=Math.round(Number(nombre1)+Number(nombre2));
+            }
+            else if(operateur=="-"){
+                input1.value=Math.round(Number(nombre1)-Number(nombre2));
+            }
+            else if(operateur=="*"){
+                input1.value=Math.round(Number(nombre1)*Number(nombre2));
+            }
+            else if(operateur=="/"){
+                input1.value=Math.round(Number(nombre1)/Number(nombre2));
+            }
+            nombre1="";
+            nombre2="";
+            chiff2=false;
+            
+        }
+    });
+}
+
+
+
+
+
 ///reset avec le bouton c
 boutonC.addEventListener("click",()=>{
     input1.value="0";
@@ -155,9 +220,10 @@ boutonEgal.addEventListener("click",()=>{
         input1.value=Math.floor(Number(nombre1)/Number(nombre2));
     }  
   
-   openMid==true;
+   openMid=true;
    nombre1="";
    nombre2="";
 }
 )
+
  
